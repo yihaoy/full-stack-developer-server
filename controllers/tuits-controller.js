@@ -5,7 +5,12 @@ let tuits = posts;
 const createTuit = (req, res) => {
   const newTuit = req.body;
   newTuit._id = (new Date()).getTime()+'';
+  newTuit.postedBy = {};
+  newTuit.username = 'user'
   newTuit.likes = 0;
+  newTuit.LOGOImage= "../tuiter/images/reactjs.png";
+  newTuit.avatarImage= "../tuiter/images/reactjs.png";
+  tuits = [newTuit, ...tuits];
   tuits.push(newTuit);
   res.json(newTuit);
 }
