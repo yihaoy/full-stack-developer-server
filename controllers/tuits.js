@@ -1,5 +1,5 @@
 export default [
-  {git
+  {
     "_id": "123",
     "postedBy": {"username": "NASA"},
     "handle": 'NASA',
