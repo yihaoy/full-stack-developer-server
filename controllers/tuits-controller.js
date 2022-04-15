@@ -1,9 +1,16 @@
-import posts from "./tuits.js";
-let tuits = posts;
+//import posts from "./tuits.js";
+//let tuits = posts;
+import tuitsDao from "../tuits-dao.js";
+const findAllTuits = async (req, res) => {
+  const tuits = await tuitsDao.findAllTuits()
+  res.json(tuits);
+}
 
-
-const createTuit = (req, res) => {
+const createTuit = async (req, res) => {
   const newTuit = req.body;
+  const insertedTuit = await tuitsDao.createTuit(newTuit);
+  res.json(insertedTuit);
+  {/*
   newTuit._id = (new Date()).getTime()+'';
   newTuit.postedBy = {};
   newTuit.username = 'user'
@@ -13,23 +20,22 @@ const createTuit = (req, res) => {
   newTuit.avatarImage = "../tuiter/images/spacex.jpg";
   tuits = [newTuit, ...tuits];
   tuits.push(newTuit);
-  res.json(newTuit);
+  res.json(newTuit); */}
 }
 
-
-const findAllTuits = (req, res) => res.json(tuits);
-
-const updateTuit = (req, res) => {
+const updateTuit = async (req, res) => {
   const tuitdIdToUpdate = req.params.tid;
   const updatedTuit = req.body;
-  tuits = tuits.map(t => t._id === tuitdIdToUpdate ? updatedTuit : t);
-  res.sendStatus(200);
+  const status = await tuitsDao.updateTuit(tuitdIdToUpdate, updatedTuit);
+  //tuits = tuits.map(t => t._id === tuitdIdToUpdate ? updatedTuit : t);
+  res.sendStatus(status);
 }
 
 
-const deleteTuit = (req, res) => {
+const deleteTuit = async (req, res) => {
   const tuitdIdToDelete = req.params.tid;
-  tuits = tuits.filter(t => t._id !== tuitdIdToDelete);
+  const status = await tuitsDao.deleteTuit(tuitdIdToDelete);
+  //tuits = tuits.filter(t => t._id !== tuitdIdToDelete);
   res.sendStatus(200);
 }
 
