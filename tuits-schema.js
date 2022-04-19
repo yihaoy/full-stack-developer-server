@@ -4,9 +4,9 @@ const schema = mongoose.Schema({
   postedBy: {
     username: String
   },
-  tuit: String,
-  title: String,
   handle: String,
+  title: String,
+  tuit: String,
   likes: Number,
   dislikes: Number,
   avatarIcon: String
